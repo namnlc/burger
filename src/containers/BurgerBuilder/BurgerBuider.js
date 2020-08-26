@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import Aux from "../../hoc/Aux";
 import Burger from "../../components/Burger/Burger";
@@ -20,11 +20,11 @@ const BurgerBuilder = () => {
       bacon: 0,
       cheese: 0,
       meat: 0,
-    },
-    { totalPrice: 4 }
+    }
   );
   const [totalPrice, setTotalPrice] = useState(4);
   const [purchasable, setPurchasable] = useState(false);
+  const [purchasing, setPurchasing] = useState(false);
 
   const addIngredientHandler = (type) => {
     const oldCount = ingredients[type];
@@ -66,6 +66,18 @@ const BurgerBuilder = () => {
     setPurchasable(sum > 0);
   }
 
+  const purchaseHandler = () => {
+    setPurchasing(true);
+  }
+
+  const purchaseCancelHandler = () => {
+    setPurchasing(false);
+  }
+
+  const purchaseContinueHandler = () => {
+    alert('You Continue');
+  }
+
   const disabledInfo = {
     ...ingredients
   };
@@ -75,14 +87,20 @@ const BurgerBuilder = () => {
   }
   return (
     <Aux>
-      <Modal>
-        <OrderSummary ingredients={ingredients}/>
+      <Modal show={purchasing} modalClosed={purchaseCancelHandler}>
+        <OrderSummary 
+        ingredients={ingredients} 
+        purchaseCanceled={purchaseCancelHandler} 
+        purchaseContinued={purchaseContinueHandler}
+        price={totalPrice}
+        />
       </Modal>
       <Burger ingredients={ingredients} />
       <BuildControls
         ingredientAdded={addIngredientHandler}
         ingredientRemoved = {removeIngredientHandler}
         purchasable={purchasable}
+        ordered={purchaseHandler}
         disabled={disabledInfo}
         price={totalPrice}
       />
