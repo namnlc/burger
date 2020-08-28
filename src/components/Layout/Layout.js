@@ -12,11 +12,15 @@ const Layout = (props) => {
     const sideDrawerCloseHandler = () => {
         setShowSideDrawer(false);
     }
+    
+    const sideDrawerToggleHandler = () => {
+        setShowSideDrawer(!showSideDrawer);
+    }
 
     return (
         <Aux>
-            <ToolBar />
-            <SideDrawer closed={sideDrawerCloseHandler} open={showSideDrawer}/>
+            <ToolBar drawerToggle={sideDrawerToggleHandler}/>
+            <SideDrawer closed={sideDrawerCloseHandler} open={showSideDrawer} />
             <main className={classes.Content}>
                 {props.children}
             </main>
