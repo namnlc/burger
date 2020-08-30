@@ -1,24 +1,29 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useMemo} from "react";
 
-import classes from './Modal.module.css';
-import Aux from '../../../hoc/Aux';
-import Backdrop from '../Backdrop/Backdrop';
+import classes from "./Modal.module.css";
+import Aux from "../../../hoc/Aux";
+import Backdrop from "../Backdrop/Backdrop";
 
 const Modal = (props) => {
 
-    return (
-        <Aux>
-       <Backdrop show={props.show} clicked={props.modalClosed}/>
-    <div className={classes.Modal}
-         style={{
-             transform: props.show ? 'translateY(0)' : 'translateY(-100vh)',
-             opacity: props.show ? '1' : '0',           
-         }}
-    >
+  // useMemo ( (nextProps, nextState) => {
+  //   return nextProps.show !== props.show || nextProps.children !== props.children;
+  // })
+
+  return (
+    <Aux>
+      <Backdrop show={props.show} clicked={props.modalClosed} />
+      <div
+        className={classes.Modal}
+        style={{
+          transform: props.show ? "translateY(0)" : "translateY(-100vh)",
+          opacity: props.show ? "1" : "0",
+        }}
+      >
         {props.children}
-    </div>
+      </div>
     </Aux>
-    );
+  );
 };
 
 export default Modal;
