@@ -1,14 +1,10 @@
-import React, {useMemo} from "react";
+import React from "react";
 
 import classes from "./Modal.module.css";
-import Aux from "../../../hoc/Aux";
+import Aux from "../../../hoc/Aux/Aux";
 import Backdrop from "../Backdrop/Backdrop";
 
 const Modal = (props) => {
-
-  // useMemo ( (nextProps, nextState) => {
-  //   return nextProps.show !== props.show || nextProps.children !== props.children;
-  // })
 
   return (
     <Aux>

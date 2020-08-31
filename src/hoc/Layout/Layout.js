@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
-import Aux from '../../hoc/Aux';
+import Aux from '../Aux/Aux';
 import classes from './Layout.module.css';
-import ToolBar from '../Navigation/ToolBar/ToolBar';
-import SideDrawer from '../Navigation/SideDrawer/SideDrawer'
+import ToolBar from '../../components/Navigation/ToolBar/ToolBar';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer'
 
 const Layout = (props) => {
 
@@ -20,7 +20,7 @@ const Layout = (props) => {
     return (
         <Aux>
             <ToolBar drawerToggle={sideDrawerToggleHandler}/>
-            <SideDrawer closed={sideDrawerCloseHandler} open={showSideDrawer} />
+            {/* <SideDrawer closed={sideDrawerCloseHandler} open={showSideDrawer} /> */}
             <main className={classes.Content}>
                 {props.children}
             </main>
