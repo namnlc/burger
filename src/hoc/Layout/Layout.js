@@ -3,15 +3,14 @@ import React, {useState} from 'react';
 import Aux from '../Aux/Aux';
 import classes from './Layout.module.css';
 import ToolBar from '../../components/Navigation/ToolBar/ToolBar';
-import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer'
 
 const Layout = (props) => {
 
     const [showSideDrawer, setShowSideDrawer] = useState(true);
 
-    const sideDrawerCloseHandler = () => {
-        setShowSideDrawer(false);
-    }
+    // const sideDrawerCloseHandler = () => {
+    //     setShowSideDrawer(false);
+    // }
     
     const sideDrawerToggleHandler = () => {
         setShowSideDrawer(!showSideDrawer);
