@@ -6,45 +6,42 @@ import classes from './ContactData.module.css';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 
 const ContactData = (props) => {
-    const [contact, setContact] = useState({
-        name: "",
-        email: "",
-        address: {
-            street: "",
-            postalCode: "",
-        }
-    })
+    // const [contact, setContact] = useState({
+    //     name: "",
+    //     email: "",
+    //     address: {
+    //         street: "",
+    //         postalCode: "",
+    //     }
+    // })
 
     const [loading, setLoading] = useState(false);
-    const [purchasing, setPurchasing] = useState (false);
+    //const [purchasing, setPurchasing] = useState (false);
     const orderHandler = (event) => {
         event.preventDefault();
-            alert('You Continue');
         setLoading(true);
         const order = {
-        ingredients: props.ingredients,
-        price: props.totalPrice,
-        customer: {
-            name: 'Max Scha',
-            address: {
-            street: 'testStreet',
-            zipCode: '41241',
-            country: 'Germany'
+            ingredients: props.ingredients,
+            price: props.totalPrice,
+            customer: {
+                name: 'Max SchwarzmÃ¼ller',
+                address: {
+                    street: 'Teststreet 1',
+                    zipCode: '41351',
+                    country: 'Germany'
+                },
+                email: 'test@test.com'
             },
-            email: 'test@test.com'
-        },
-        deliveryMethod: 'fastest'  
+            deliveryMethod: 'fastest'
         }
-        axios.post('/orders.json', order)
-        .then(res=> {
-        setLoading(false);
-        setPurchasing(false);
-        props.history.push('/');
-        })
-        .catch(error=> {
-        setLoading(false);
-        setPurchasing(false);
-        });
+        axios.post( '/orders.json', order )
+            .then( response => {
+                setLoading(false);
+                props.history.push('/');
+            } )
+            .catch( error => {
+                setLoading(false);
+            } );
     }
     let form = (
         <form>

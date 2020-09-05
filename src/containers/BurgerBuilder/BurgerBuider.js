@@ -24,7 +24,6 @@ const BurgerBuilder = (props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   useEffect(() => {
-    console.log(props);
     axios.get('https://burger-e90db.firebaseio.com/ingredients.json')
     .then(res => {
       setIngredients(res.data);
@@ -33,7 +32,7 @@ const BurgerBuilder = (props) => {
     .catch(error => {
       setError (true);
     });
-  },[props])
+  },[])
 
   const addIngredientHandler = (type) => {
     const oldCount = ingredients[type];
