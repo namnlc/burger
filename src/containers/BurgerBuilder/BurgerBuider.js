@@ -28,7 +28,7 @@ const BurgerBuilder = (props) => {
     axios.get('https://burger-e90db.firebaseio.com/ingredients.json')
     .then(res => {
       setIngredients(res.data);
-      console.log(res.data.chesse);
+      console.log(res.data);
     })
     .catch(error => {
       setError (true);
@@ -84,35 +84,12 @@ const BurgerBuilder = (props) => {
   }
 
   const purchaseContinueHandler = () => {
-    //alert('You Continue');
-    // setLoading(true);
-    // const order = {
-    //   ingredients: ingredients,
-    //   price: totalPrice,
-    //   customer: {
-    //     name: 'Max Scha',
-    //     address: {
-    //       street: 'testStreet',
-    //       zipCode: '41241',
-    //       country: 'Germany'
-    //     },
-    //     email: 'test@test.com'
-    //   },
-    //   deliveryMethod: 'fastest'  
-    // }
-    // axios.post('/orders.json', order)
-    // .then(res=> {
-    //   setLoading(false);
-    //   setPurchasing(false);
-    // })
-    // .catch(error=> {
-    //   setLoading(false);
-    //   setPurchasing(false);
-    // });
     const queryParams = [];
     for (let i in ingredients) {
       queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(ingredients[i]));
     }
+
+    queryParams.push('price=' + totalPrice);
     const queryString = queryParams.join('&');
 
 

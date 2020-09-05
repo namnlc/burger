@@ -1,14 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 import classes from './Burger.module.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
-const Burger = ( props ) => {
-
-    useEffect (() => {
-        console.log(props);   
-    })
-
+const burger = ( props ) => {
     let transformedIngredients = Object.keys( props.ingredients )
         .map( igKey => {
             return [...Array( props.ingredients[igKey] )].map( ( _, i ) => {
@@ -30,4 +25,4 @@ const Burger = ( props ) => {
     );
 };
 
-export default Burger;
+export default burger;
