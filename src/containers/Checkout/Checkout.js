@@ -5,7 +5,7 @@ import CheckoutSummary from "../../components/Oder/CheckoutSummary/CheckoutSumma
 import ContactData from "./ContactData/ContactData";
 
 const Checkout = (props) => {
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [price, setPrice] = useState(0);
   const [ingredients, setIngredients] = useState({
     salad: 1,
     chesse: 1,
@@ -25,8 +25,8 @@ const Checkout = (props) => {
       }
     }
     setIngredients(ingredients);
-    setTotalPrice(price);
-  },[props.location.search]);
+    setPrice(price);
+  },[]);
 
   const checkoutCancelledHandler = () => {
     props.history.goBack();
@@ -47,7 +47,7 @@ const Checkout = (props) => {
         render={(props) => (
           <ContactData
             ingredients={ingredients}
-            price={totalPrice}
+            totalPrice={price}
             {...props}
           />
         )}
