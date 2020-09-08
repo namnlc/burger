@@ -10,17 +10,9 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actionTypes from '../../store/actions';
 import axios from '../../axios-orders';
 
-const INGREDIENT_PRICES = {
-  salad: 0.5,
-  cheese: 0.4,
-  bacon: 1.3,
-  meat: 0.7,
-};
-
 const BurgerBuilder = (props) => {
   const [ingredients, setIngredients] = useState(null);
   const [totalPrice, setTotalPrice] = useState(4);
-  const [purchasable, setPurchasable] = useState(false);
   const [purchasing, setPurchasing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -35,36 +27,6 @@ const BurgerBuilder = (props) => {
   //     setError (true);
   //   });
   // },[])
-
-  const addIngredientHandler = (type) => {
-    const oldCount = ingredients[type];
-    const updatedCount = oldCount + 1;
-    const updatedIngredients = {
-      ...ingredients,
-    };
-    updatedIngredients[type] = updatedCount;
-    const priceAddition = INGREDIENT_PRICES[type];
-    const oldPrice = totalPrice;
-    const newPrice = oldPrice + priceAddition;
-    setTotalPrice(newPrice);
-    setIngredients(updatedIngredients);
-    updatePurchaseState(updatedIngredients);
-  }; 
-  const removeIngredientHandler = (type) => {
-    const oldCount = ingredients[type];
-      const updatedCount = oldCount - 1;
-      const updatedIngredients = {
-        ...ingredients
-      };
-      updatedIngredients[type] = updatedCount;
-      const priceDeduction = INGREDIENT_PRICES[type];
-      const oldPrice = totalPrice;
-      const newPrice = oldPrice - priceDeduction;
-      setTotalPrice(newPrice);
-      setIngredients(updatedIngredients);
-      updatePurchaseState(updatedIngredients);
-  }
-
   const updatePurchaseState = (ingredients) => {
     const sum = Object.keys(ingredients)
     .map(igKey => {
@@ -73,7 +35,7 @@ const BurgerBuilder = (props) => {
     .reduce((sum,el)=> {
       return sum + el;
     }, 0);
-    setPurchasable(sum > 0);
+    return sum > 0;
   }
 
   const purchaseHandler = () => {
@@ -96,12 +58,12 @@ const BurgerBuilder = (props) => {
 
     props.history.push({
       pathname: '/checkout',
-      search: "?" + queryString,
+      search: "?" + queryString, 
     });
   }
 
   const disabledInfo = {
-    ...ingredients
+    ...props.ings
   };
 
   for ( let key in disabledInfo ) {
@@ -119,18 +81,18 @@ const BurgerBuilder = (props) => {
         <BuildControls
           ingredientAdded={props.onAddIngredient}
           ingredientRemoved = {props.onRemoveIngredient}
-          purchasable={purchasable}
+          purchasable={updatePurchaseState(props.ings)}
           ordered={purchaseHandler}
           disabled={disabledInfo}
-          price={totalPrice}
+          price={props.price}
         />
       </Aux>
     );
-    orderSummary = <OrderSummary 
+    orderSummary = <OrderSummary
           ingredients={props.ings} 
           purchaseCanceled={purchaseCancelHandler} 
           purchaseContinued={purchaseContinueHandler}
-          price={totalPrice}
+          price={props.price}
           />;
   }
   if (loading) {
@@ -149,6 +111,7 @@ const BurgerBuilder = (props) => {
 const mapStateToProps = state => {
   return {
     ings: state.ingredients,
+    price: state.totalPrice,
   }
 }
 
@@ -159,4 +122,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapDispatchToProps, mapStateToProps)(BurgerBuilder);
+export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);
