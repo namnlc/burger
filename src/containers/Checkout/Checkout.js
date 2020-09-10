@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
-import { Connect, connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import CheckoutSummary from "../../components/Oder/CheckoutSummary/CheckoutSummary";
 import ContactData from "./ContactData/ContactData";

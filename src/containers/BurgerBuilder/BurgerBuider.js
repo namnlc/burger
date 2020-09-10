@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {connect} from 'react-redux';
 
 import Aux from "../../hoc/Aux/Aux";
@@ -8,7 +8,6 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actionTypes from '../../store/actions';
-import axios from '../../axios-orders';
 
 const BurgerBuilder = (props) => {
   const [ingredients, setIngredients] = useState(null);
